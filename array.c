@@ -78,6 +78,13 @@ void array_free(Array *array) {
   free(array);
 }
 
+void array_freeContents(Array *array, void (*freefunc)(void*)) {
+  freefunc = freefunc ? freefunc : free;
+  for (size_t i = 0; i < array->len; ++i) {
+    freefunc((void*) array->arr[i]);
+  }
+}
+
 void array_prune(Array *array) {
   memset(array->arr, 0, array->cap);
   array->len = 0;

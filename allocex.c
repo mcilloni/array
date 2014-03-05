@@ -13,7 +13,7 @@ int main(void) {
     array_append(arr, malloc(sizeof(char)));
   }
 
-  array_freeContents(arr);
+  array_freeContents(arr, NULL);
 
   array_free(arr);
   return EXIT_SUCCESS;

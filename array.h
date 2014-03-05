@@ -12,6 +12,7 @@ extern bool (*array_append)(Array *array, const void *value);
 bool array_appendint(Array *array, uintptr_t value);
 size_t array_cap(Array *array);
 void array_free(Array *array);
+void array_freeContents(Array *array, void (*freefunc)(void*));
 extern void** (*array_get)(Array *array, size_t index);
 uintptr_t* array_getint(Array *array, size_t index);
 size_t array_len(Array *array);

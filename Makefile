@@ -8,11 +8,12 @@ all: clean
 	$(RANLIB) libarray.a
 	$(CC) -o ex ex.c -L. -larray -ljemalloc -Wall -pedantic -g
 	$(CC) -o strex strex.c -L. -larray -ljemalloc -Wall -pedantic -g
+	$(CC) -o allocex allocex.c -L. -larray -ljemalloc -Wall -pedantic -g
 	$(CC) -o libarray.so array.o -shared 
 	rm -f *.o
 
 clean:
 	rm -f libarray.{a,so}
-	rm -f *.o	
-	rm -f ex strex
+	rm -f *.{o,gch}
+	rm -f ex strex allocex
 
