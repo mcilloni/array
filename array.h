@@ -7,6 +7,7 @@
 
 struct array_struct;
 typedef struct array_struct Array;
+typedef void (*freefunc)(void*);
 
 extern bool (*array_append)(Array *array, const void *value);
 bool array_appendint(Array *array, uintptr_t value);
@@ -21,6 +22,7 @@ void array_newcap(Array *array, size_t newcap);
 void array_prune(Array *array);
 extern bool (*array_put)(Array *array, size_t index, const void *value);
 bool array_putint(Array *array, size_t index, uintptr_t value);
+Array* array_slice(Array *array, size_t start, intmax_t len);
 
 #endif
 

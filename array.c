@@ -1,16 +1,21 @@
 #include "array.h"
 
 #include <jemalloc/jemalloc.h>
+
+#include <stdint.h>
 #include <string.h>
 
 struct array_struct {
   uintptr_t *arr;
   size_t cap,len;
+  bool isSlice;
 };
 
 Array* array_new(size_t cap) {
   Array *arr = calloc(1, sizeof(Array));
-  arr->arr = calloc(cap, sizeof(uintptr_t));
+  if (cap) {
+    arr->arr = calloc(cap, sizeof(uintptr_t));
+  }
   arr->cap = cap;
   return arr;
 }
@@ -29,6 +34,7 @@ void array_newcap(Array *array, size_t newcap) {
   array->arr = newarr;
   array->len = (array->len > newcap) ? newcap : array->len;
   array->cap = newcap;
+  array->isSlice = false;
 
 }
 
@@ -74,7 +80,10 @@ bool array_appendint(Array *array, uintptr_t value) {
 }
 
 void array_free(Array *array) {
-  free(array->arr);
+  if (!array->isSlice) {
+    free(array->arr);
+  }
+
   free(array);
 }
 
@@ -88,6 +97,27 @@ void array_freeContents(Array *array, void (*freefunc)(void*)) {
 void array_prune(Array *array) {
   memset(array->arr, 0, array->cap);
   array->len = 0;
+}
+
+Array* array_slice(Array *array, size_t start, intmax_t len) {
+  Array *ret = array_new(0);
+
+  ret->isSlice = true;
+    
+  if (len < 0) {
+    len = array->len - start;
+  }
+
+  if (len > (array->len - start)) {
+    len = array->len - start;
+  }
+
+  ret->cap = len;
+  ret->len = len;
+
+  ret->arr = array->arr + start;
+
+  return ret;
 }
 
 bool (*array_append)(Array *array, const void *value) = (bool (*) (Array*,const void*)) array_appendint;

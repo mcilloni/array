@@ -9,6 +9,7 @@ all: clean
 	$(CC) -o ex ex.c -L. -larray -ljemalloc -Wall -pedantic -g
 	$(CC) -o strex strex.c -L. -larray -ljemalloc -Wall -pedantic -g
 	$(CC) -o allocex allocex.c -L. -larray -ljemalloc -Wall -pedantic -g
+	$(CC) -o slicex slicex.c -L. -larray -ljemalloc -Wall -pedantic -g
 	$(CC) -o libarray.so array.o -shared 
 	rm -f *.o
 
