@@ -88,6 +88,11 @@ void array_free(Array *array) {
 }
 
 void array_freeContents(Array *array, void (*freefunc)(void*)) {
+
+  if (array->isSlice) {
+    return;
+  }
+
   freefunc = freefunc ? freefunc : free;
   for (size_t i = 0; i < array->len; ++i) {
     freefunc((void*) array->arr[i]);
