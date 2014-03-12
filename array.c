@@ -1,8 +1,7 @@
 #include "array.h"
 
-#include <jemalloc/jemalloc.h>
-
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 
 struct array_struct {

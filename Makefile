@@ -6,10 +6,10 @@ all: clean
 	$(CC) -c array.c -g -Wall -pedantic -fPIC
 	$(AR) -rc libarray.a array.o
 	$(RANLIB) libarray.a
-	$(CC) -o ex ex.c -L. -larray -ljemalloc -Wall -pedantic -g
-	$(CC) -o strex strex.c -L. -larray -ljemalloc -Wall -pedantic -g
-	$(CC) -o allocex allocex.c -L. -larray -ljemalloc -Wall -pedantic -g
-	$(CC) -o slicex slicex.c -L. -larray -ljemalloc -Wall -pedantic -g
+	$(CC) -o ex ex.c -L. -larray  -Wall -pedantic -g
+	$(CC) -o strex strex.c -L. -larray  -Wall -pedantic -g
+	$(CC) -o allocex allocex.c -L. -larray  -Wall -pedantic -g
+	$(CC) -o slicex slicex.c -L. -larray  -Wall -pedantic -g
 	$(CC) -o libarray.so array.o -shared 
 	rm -f *.o
 
