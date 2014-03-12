@@ -24,7 +24,7 @@ int main(void) {
       inside = true;
     }
 
-    printf("%s", *array_get(arr, i));
+    printf("%s", (char*) *array_get(arr, i));
   }
   puts(" ]");
 
