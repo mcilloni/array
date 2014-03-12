@@ -80,23 +80,34 @@ bool array_appendint(Array *array, uintptr_t value) {
 }
 
 void array_free(Array *array) {
-  if (!array->isSlice) {
-    free(array->arr);
+
+  if (array) {
+
+    if (!array->isSlice) {
+      free(array->arr);
+    }
+
+    free(array);
+
   }
 
-  free(array);
 }
 
 void array_freeContents(Array *array, void (*freefunc)(void*)) {
 
-  if (array->isSlice) {
-    return;
+  if (array) {
+
+    if (array->isSlice) {
+      return;
+    }
+
+    freefunc = freefunc ? freefunc : free;
+    for (size_t i = 0; i < array->len; ++i) {
+      freefunc((void*) array->arr[i]);
+    }
+
   }
 
-  freefunc = freefunc ? freefunc : free;
-  for (size_t i = 0; i < array->len; ++i) {
-    freefunc((void*) array->arr[i]);
-  }
 }
 
 void array_prune(Array *array) {
