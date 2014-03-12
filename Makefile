@@ -16,5 +16,5 @@ all: clean
 clean:
 	rm -f libarray.{a,so}
 	rm -f *.{o,gch}
-	rm -f ex strex allocex
+	rm -f ex strex allocex slicex
 
