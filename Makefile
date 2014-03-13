@@ -13,7 +13,6 @@ all: clean
 	$(CC) -o strex strex.c -std=c11 -L. -larray  -Wall -pedantic -g
 	$(CC) -o allocex allocex.c -std=c11 -L. -larray  -Wall -pedantic -g
 	$(CC) -o slicex slicex.c -std=c11 -L. -larray  -Wall -pedantic -g
-	$(CC) -o libarray.so array.o -shared 
 	rm -f *.o
 
 clean:
