@@ -10,16 +10,16 @@ int main(void) {
   Array *arr = array_new(3);
 
   array_appendint(arr, 33);
-  printf("arr[%lu] == %lu, len == %lu, cap == %lu\n", 0LU, *array_getint(arr, 0), array_len(arr), array_cap(arr));
+  printf("arr[%lu] == %lu, len == %zu, cap == %zu\n", 0LU, *array_getint(arr, 0), array_len(arr), array_cap(arr));
 
 
   array_putint(arr, 0, 25);
-  printf("arr[%lu] == %lu, len == %lu, cap == %lu\n", 0LU, *array_getint(arr, 0), array_len(arr), array_cap(arr));
+  printf("arr[%lu] == %lu, len == %zu, cap == %zu\n", 0LU, *array_getint(arr, 0), array_len(arr), array_cap(arr));
 
   array_putint(arr, 12, 38);
-  printf("arr[%lu] == %lu, len == %lu, cap == %lu\n", 12LU, *array_getint(arr, 12), array_len(arr), array_cap(arr));
+  printf("arr[%lu] == %lu, len == %zu, cap == %zu\n", 12LU, *array_getint(arr, 12), array_len(arr), array_cap(arr));
 
-  printf("arr[%lu] == %lu, len == %lu, cap == %lu\n", 0LU, *array_getint(arr, 0), array_len(arr), array_cap(arr));
+  printf("arr[%lu] == %lu, len == %zu, cap == %zu\n", 0LU, *array_getint(arr, 0), array_len(arr), array_cap(arr));
 
   array_prune(arr);
 
@@ -29,7 +29,7 @@ int main(void) {
     array_appendint(arr, i);
     ncap = array_cap(arr);
     if (cap != ncap) {
-      printf("New capacity: %lu\n", ncap);
+      printf("New capacity: %zu\n", ncap);
       cap = ncap;
     }
   }
