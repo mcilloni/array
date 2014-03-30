@@ -1,4 +1,6 @@
 #include "array.h"
+
+#include <inttypes.h>
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -14,7 +16,7 @@ void printarray(Array *arr) {
       inside = true;
     }
 
-    printf("%lu", *array_getint(arr, i));
+    printf("%" PRIuPTR,  *array_getint(arr, i));
   }
   puts(" ]");
 }
