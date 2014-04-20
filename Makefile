@@ -2,7 +2,9 @@ ifndef CC
 	CC=clang
 endif
 
-AR=ar
+ifndef AR
+	AR=ar 
+endif
 
 ifndef RANLIB
 	RANLIB=ranlib
@@ -10,7 +12,7 @@ endif
 
 all: clean
 	$(CC) -c array.c -std=c11 -g -Wall -pedantic -fPIC
-	$(AR) -rc libarray.a array.o
+	$(AR) rc libarray.a array.o
 	$(RANLIB) libarray.a
 	$(CC) -o ex ex.c -std=c11 -L. -larray  -Wall -pedantic -g
 	$(CC) -o strex strex.c -std=c11 -L. -larray  -Wall -pedantic -g
