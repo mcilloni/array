@@ -10,18 +10,36 @@ ifndef RANLIB
 	RANLIB=ranlib
 endif
 
-all: clean
-	$(CC) -c array.c -std=c11 -g -Wall -pedantic -fPIC
+ARCH = $(shell uname -m)
+UNAME = $(shell uname)
+
+FLAGS =
+
+ifeq ($(ARCH),x86_64)
+ifeq (,$(findstring CYGWIN,$(UNAME)))
+	FLAGS += -fPIC
+endif
+endif
+
+.PHONY: all,clean
+
+SRCS = $(wildcard *.c)
+OBJS = $(patsubst %.c,%.o,$(SRCS))
+
+all: $(OBJS)
 	$(AR) rc libarray.a array.o
 	$(RANLIB) libarray.a
-	$(CC) -o ex ex.c -std=c11 -L. -larray  -Wall -pedantic -g
-	$(CC) -o strex strex.c -std=c11 -L. -larray  -Wall -pedantic -g
-	$(CC) -o allocex allocex.c -std=c11 -L. -larray  -Wall -pedantic -g
-	$(CC) -o slicex slicex.c -std=c11 -L. -larray  -Wall -pedantic -g
+	$(CC) -o ex ex.o -std=c11 -L. -larray -g
+	$(CC) -o strex strex.o -std=c11 -L. -larray -g
+	$(CC) -o allocex allocex.o -std=c11 -L. -larray -g
+	$(CC) -o slicex slicex.o -std=c11 -L. -larray -g
 	rm -f *.o
 
+%.o: %.c
+	$(CC) -c $< -o $@ -std=c11 -g -Wall -pedantic $(FLAGS)
+
 clean:
-	rm -f libarray.{a,so}
-	rm -f *.{o,gch}
+	rm -f libarray.a
+	rm -f $(OBJS)
 	rm -f ex strex allocex slicex
 
