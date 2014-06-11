@@ -5,6 +5,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 struct array_struct;
 typedef struct array_struct Array;
 typedef void (*freefunc)(void*);
@@ -23,6 +27,10 @@ void array_prune(Array *array);
 extern bool (*array_put)(Array *array, size_t index, const void *value);
 bool array_putint(Array *array, size_t index, uintptr_t value);
 Array* array_slice(Array *array, size_t start, intmax_t len);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif
 
