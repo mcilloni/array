@@ -29,14 +29,14 @@ OBJS = $(patsubst %.c,%.o,$(SRCS))
 all: $(OBJS)
 	$(AR) rc libarray.a array.o
 	$(RANLIB) libarray.a
-	$(CC) -o ex ex.o -std=c11 -L. -larray -g
-	$(CC) -o strex strex.o -std=c11 -L. -larray -g
-	$(CC) -o allocex allocex.o -std=c11 -L. -larray -g
-	$(CC) -o slicex slicex.o -std=c11 -L. -larray -g
+	$(CC) -o ex ex.o -std=c99 -L. -larray -g
+	$(CC) -o strex strex.o -std=c99 -L. -larray -g
+	$(CC) -o allocex allocex.o -std=c99 -L. -larray -g
+	$(CC) -o slicex slicex.o -std=c99 -L. -larray -g
 	rm -f *.o
 
 %.o: %.c
-	$(CC) -c $< -o $@ -std=c11 -g -Wall -pedantic $(FLAGS)
+	$(CC) -c $< -o $@ -std=c99 -g -Wall -pedantic $(FLAGS)
 
 clean:
 	rm -f libarray.a
