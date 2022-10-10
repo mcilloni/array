@@ -1,5 +1,2 @@
-allocex
-ex
-libarray.a
-slicex
-strex
+build
+.vscode
